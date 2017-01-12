@@ -97,7 +97,7 @@ var events = __webpack_require__(/*! events */ 12),
     readline = __webpack_require__(/*! readline */ 0),
     util = __webpack_require__(/*! util */ 14),
     async = __webpack_require__(/*! async */ 4),
-    read = __webpack_require__(/*! read */ 8),
+    read = __webpack_require__(/*! read */ 9),
     validate = __webpack_require__(/*! revalidator */ 10).validate,
     colors = __webpack_require__(/*! colors */ 7);
 
@@ -918,9 +918,9 @@ module.exports = require("path");
 /* 4 */
 /* unknown exports provided */
 /* all exports used */
-/*!****************************************!*\
-  !*** ./~/prompt-lite/~/async/index.js ***!
-  \****************************************/
+/*!**************************!*\
+  !*** ./~/async/index.js ***!
+  \**************************/
 /***/ function(module, exports, __webpack_require__) {
 
 // This file is just added for convenience so this repository can be
@@ -932,9 +932,9 @@ module.exports = __webpack_require__(/*! ./lib/async */ 5);
 /* 5 */
 /* unknown exports provided */
 /* all exports used */
-/*!********************************************!*\
-  !*** ./~/prompt-lite/~/async/lib/async.js ***!
-  \********************************************/
+/*!******************************!*\
+  !*** ./~/async/lib/async.js ***!
+  \******************************/
 /***/ function(module, exports) {
 
 /*global setTimeout: false, console: false */
@@ -1635,9 +1635,9 @@ module.exports = __webpack_require__(/*! ./lib/async */ 5);
 /* 6 */
 /* unknown exports provided */
 /* all exports used */
-/*!********************************!*\
-  !*** ./~/prompt-lite/~/colors ***!
-  \********************************/
+/*!******************!*\
+  !*** ./~/colors ***!
+  \******************/
 /***/ function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -1653,9 +1653,9 @@ webpackEmptyContext.id = 6;
 /* 7 */
 /* unknown exports provided */
 /* all exports used */
-/*!******************************************!*\
-  !*** ./~/prompt-lite/~/colors/colors.js ***!
-  \******************************************/
+/*!****************************!*\
+  !*** ./~/colors/colors.js ***!
+  \****************************/
 /***/ function(module, exports, __webpack_require__) {
 
 /*
@@ -2006,133 +2006,9 @@ addProperty('zalgo', function () {
 /* 8 */
 /* unknown exports provided */
 /* all exports used */
-/*!******************************************!*\
-  !*** ./~/prompt-lite/~/read/lib/read.js ***!
-  \******************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-
-module.exports = read
-
-var readline = __webpack_require__(/*! readline */ 0)
-var Mute = __webpack_require__(/*! mute-stream */ 9)
-
-function read (opts, cb) {
-  if (opts.num) {
-    throw new Error('read() no longer accepts a char number limit')
-  }
-
-  if (typeof opts.default !== 'undefined' &&
-      typeof opts.default !== 'string' &&
-      typeof opts.default !== 'number') {
-    throw new Error('default value must be string or number')
-  }
-
-  var input = opts.input || process.stdin
-  var output = opts.output || process.stdout
-  var prompt = (opts.prompt || '').trim() + ' '
-  var silent = opts.silent
-  var editDef = false
-  var timeout = opts.timeout
-
-  var def = opts.default || ''
-  if (def) {
-    if (silent) {
-      prompt += '(<default hidden>) '
-    } else if (opts.edit) {
-      editDef = true
-    } else {
-      prompt += '(' + def + ') '
-    }
-  }
-  var terminal = !!(opts.terminal || output.isTTY)
-
-  var m = new Mute({ replace: opts.replace, prompt: prompt })
-  m.pipe(output, {end: false})
-  output = m
-  var rlOpts = { input: input, output: output, terminal: terminal }
-
-  if (process.version.match(/^v0\.6/)) {
-    var rl = readline.createInterface(rlOpts.input, rlOpts.output)
-  } else {
-    var rl = readline.createInterface(rlOpts)
-  }
-
-
-  output.unmute()
-  rl.setPrompt(prompt)
-  rl.prompt()
-  if (silent) {
-    output.mute()
-  } else if (editDef) {
-    rl.line = def
-    rl.cursor = def.length
-    rl._refreshLine()
-  }
-
-  var called = false
-  rl.on('line', onLine)
-  rl.on('error', onError)
-
-  rl.on('SIGINT', function () {
-    rl.close()
-    onError(new Error('canceled'))
-  })
-
-  var timer
-  if (timeout) {
-    timer = setTimeout(function () {
-      onError(new Error('timed out'))
-    }, timeout)
-  }
-
-  function done () {
-    called = true
-    rl.close()
-
-    if (process.version.match(/^v0\.6/)) {
-      rl.input.removeAllListeners('data')
-      rl.input.removeAllListeners('keypress')
-      rl.input.pause()
-    }
-
-    clearTimeout(timer)
-    output.mute()
-    output.end()
-  }
-
-  function onError (er) {
-    if (called) return
-    done()
-    return cb(er)
-  }
-
-  function onLine (line) {
-    if (called) return
-    if (silent && terminal) {
-      output.unmute()
-      output.write('\r\n')
-    }
-    done()
-    // truncate the \n at the end.
-    line = line.replace(/\r?\n$/, '')
-    var isDefault = !!(editDef && line === def)
-    if (def && !line) {
-      isDefault = true
-      line = def
-    }
-    cb(null, line, isDefault)
-  }
-}
-
-
-/***/ },
-/* 9 */
-/* unknown exports provided */
-/* all exports used */
-/*!****************************************************!*\
-  !*** ./~/prompt-lite/~/read/~/mute-stream/mute.js ***!
-  \****************************************************/
+/*!*******************************!*\
+  !*** ./~/mute-stream/mute.js ***!
+  \*******************************/
 /***/ function(module, exports, __webpack_require__) {
 
 var Stream = __webpack_require__(/*! stream */ 13)
@@ -2283,12 +2159,136 @@ MuteStream.prototype.close = proxy('close')
 
 
 /***/ },
+/* 9 */
+/* unknown exports provided */
+/* all exports used */
+/*!****************************!*\
+  !*** ./~/read/lib/read.js ***!
+  \****************************/
+/***/ function(module, exports, __webpack_require__) {
+
+
+module.exports = read
+
+var readline = __webpack_require__(/*! readline */ 0)
+var Mute = __webpack_require__(/*! mute-stream */ 8)
+
+function read (opts, cb) {
+  if (opts.num) {
+    throw new Error('read() no longer accepts a char number limit')
+  }
+
+  if (typeof opts.default !== 'undefined' &&
+      typeof opts.default !== 'string' &&
+      typeof opts.default !== 'number') {
+    throw new Error('default value must be string or number')
+  }
+
+  var input = opts.input || process.stdin
+  var output = opts.output || process.stdout
+  var prompt = (opts.prompt || '').trim() + ' '
+  var silent = opts.silent
+  var editDef = false
+  var timeout = opts.timeout
+
+  var def = opts.default || ''
+  if (def) {
+    if (silent) {
+      prompt += '(<default hidden>) '
+    } else if (opts.edit) {
+      editDef = true
+    } else {
+      prompt += '(' + def + ') '
+    }
+  }
+  var terminal = !!(opts.terminal || output.isTTY)
+
+  var m = new Mute({ replace: opts.replace, prompt: prompt })
+  m.pipe(output, {end: false})
+  output = m
+  var rlOpts = { input: input, output: output, terminal: terminal }
+
+  if (process.version.match(/^v0\.6/)) {
+    var rl = readline.createInterface(rlOpts.input, rlOpts.output)
+  } else {
+    var rl = readline.createInterface(rlOpts)
+  }
+
+
+  output.unmute()
+  rl.setPrompt(prompt)
+  rl.prompt()
+  if (silent) {
+    output.mute()
+  } else if (editDef) {
+    rl.line = def
+    rl.cursor = def.length
+    rl._refreshLine()
+  }
+
+  var called = false
+  rl.on('line', onLine)
+  rl.on('error', onError)
+
+  rl.on('SIGINT', function () {
+    rl.close()
+    onError(new Error('canceled'))
+  })
+
+  var timer
+  if (timeout) {
+    timer = setTimeout(function () {
+      onError(new Error('timed out'))
+    }, timeout)
+  }
+
+  function done () {
+    called = true
+    rl.close()
+
+    if (process.version.match(/^v0\.6/)) {
+      rl.input.removeAllListeners('data')
+      rl.input.removeAllListeners('keypress')
+      rl.input.pause()
+    }
+
+    clearTimeout(timer)
+    output.mute()
+    output.end()
+  }
+
+  function onError (er) {
+    if (called) return
+    done()
+    return cb(er)
+  }
+
+  function onLine (line) {
+    if (called) return
+    if (silent && terminal) {
+      output.unmute()
+      output.write('\r\n')
+    }
+    done()
+    // truncate the \n at the end.
+    line = line.replace(/\r?\n$/, '')
+    var isDefault = !!(editDef && line === def)
+    if (def && !line) {
+      isDefault = true
+      line = def
+    }
+    cb(null, line, isDefault)
+  }
+}
+
+
+/***/ },
 /* 10 */
 /* unknown exports provided */
 /* all exports used */
-/*!********************************************************!*\
-  !*** ./~/prompt-lite/~/revalidator/lib/revalidator.js ***!
-  \********************************************************/
+/*!******************************************!*\
+  !*** ./~/revalidator/lib/revalidator.js ***!
+  \******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {(function (exports) {
@@ -2719,7 +2719,7 @@ MuteStream.prototype.close = proxy('close')
 
 })(typeof module === 'object' && module && module.exports ? module.exports : window);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../../webpack/buildin/module.js */ 11)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/buildin/module.js */ 11)(module)))
 
 /***/ },
 /* 11 */
@@ -3047,25 +3047,25 @@ repositories {
 
 dependencies {
     // make sure you have these versions by updating your local Android SDK's (Android Support repo and Google repo)
-    compile "com.google.firebase:firebase-core:10.0.+"
-    compile "com.google.firebase:firebase-database:10.0.+"
-    compile "com.google.firebase:firebase-auth:10.0.+"
+    compile "com.google.firebase:firebase-core:9.8.0"
+    compile "com.google.firebase:firebase-database:9.8.0"
+    compile "com.google.firebase:firebase-auth:9.8.0"
 
     // for reading google-services.json and configuration
-    def googlePlayServicesVersion = project.hasProperty('googlePlayServicesVersion') ? project.googlePlayServicesVersion : '10.0.+'
+    def googlePlayServicesVersion = project.hasProperty('googlePlayServicesVersion') ? project.googlePlayServicesVersion : '9.8.0'
     compile "com.google.android.gms:play-services-base:$googlePlayServicesVersion"
 
     // Uncomment if you want to use 'Remote Config'
-    ` + (isSelected(result.remote_config) ? `` : `//`) + ` compile "com.google.firebase:firebase-config:10.0.+"
+    ` + (isSelected(result.remote_config) ? `` : `//`) + ` compile "com.google.firebase:firebase-config:9.8.0"
 
     // Uncomment if you want to use 'Crash Reporting'
-    ` + (isSelected(result.crash_reporting) ? `` : `//`) + ` compile "com.google.firebase:firebase-crash:10.0.+"
+    ` + (isSelected(result.crash_reporting) ? `` : `//`) + ` compile "com.google.firebase:firebase-crash:9.8.0"
 
     // Uncomment if you want FCM (Firebase Cloud Messaging)
-    ` + (isSelected(result.messaging) ? `` : `//`) + ` compile "com.google.firebase:firebase-messaging:10.0.+"
+    ` + (isSelected(result.messaging) ? `` : `//`) + ` compile "com.google.firebase:firebase-messaging:9.8.0"
 
     // Uncomment if you want Google Cloud Storage
-    ` + (isSelected(result.storage) ? `` : `//`) + ` compile 'com.google.firebase:firebase-storage:10.0.+'
+    ` + (isSelected(result.storage) ? `` : `//`) + ` compile 'com.google.firebase:firebase-storage:9.8.0'
 
     // Uncomment if you need Facebook Authentication
     ` + (isSelected(result.facebook_auth) ? `` : `//`) + ` compile "com.facebook.android:facebook-android-sdk:4.+"
