@@ -299,6 +299,38 @@ firebase.addOnPushTokenReceivedCallback = function (callback) {
   });
 };
 
+firebase.subscribeToTopic = function (topic) {
+  return new Promise(function (resolve, reject) {
+    try {
+      if (typeof(com.google.firebase.messaging) === "undefined") {
+        reject("Uncomment firebase-messaging in the plugin's include.gradle first");
+        return;
+      }
+      com.google.firebase.messaging.FirebaseMessaging.getInstance().subscribeToTopic(topic);
+      resolve();
+    } catch (ex) {
+      console.log("Error in firebase.subscribeToTopic: " + ex);
+      reject(ex);
+    }
+  });
+};
+
+firebase.unsubscribeFromTopic = function (topic) {
+  return new Promise(function (resolve, reject) {
+    try {
+      if (typeof(com.google.firebase.messaging) === "undefined") {
+        reject("Uncomment firebase-messaging in the plugin's include.gradle first");
+        return;
+      }
+      com.google.firebase.messaging.FirebaseMessaging.getInstance().unsubscribeFromTopic(topic);
+      resolve();
+    } catch (ex) {
+      console.log("Error in firebase.unsubscribeFromTopic: " + ex);
+      reject(ex);
+    }
+  });
+};
+
 firebase.getRemoteConfigDefaults = function (properties) {
   var defaults = {};
   for (var p in properties) {
