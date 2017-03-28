@@ -34,6 +34,9 @@ dependencies {
     // Uncomment if you want Google Cloud Storage
 //    compile 'com.google.firebase:firebase-storage:9.8.0'
 
+    // Uncomment if you want AdMob
+//    compile 'com.google.firebase:firebase-ads:9.8.+'
+
     // Uncomment if you need Facebook Authentication
 //    compile "com.facebook.android:facebook-android-sdk:4.+"
 

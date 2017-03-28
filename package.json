@@ -1,6 +1,6 @@
 {
   "name": "nativescript-plugin-firebase",
-  "version": "3.9.0",
+  "version": "3.11.2",
   "description": "Fire. Base. Firebase!",
   "main": "firebase",
   "typings": "index.d.ts",
@@ -8,12 +8,26 @@
     "platforms": {
       "android": "2.3.0",
       "ios": "2.3.0"
-    }
+    },
+    "hooks": [
+      {
+        "type": "before-prepare",
+        "script": "scripts/entitlements-before-prepare.js",
+        "inject": true
+      },
+      {
+        "type": "after-prepare",
+        "script": "scripts/entitlements-after-prepare.js",
+        "inject": true
+      }
+    ]
   },
   "scripts": {
-    "bundle-installer": "npm install --ignore-scripts && webpack --config scripts/webpack.config.js scripts/installer.js scripts/postinstall.js && webpack --config scripts/webpack.config.js scripts/install_ios_entitlements.js scripts/install_ios_entitlements_packed.js",
+    "bundle-installer": "npm install --ignore-scripts && webpack --config scripts/webpack.config.js scripts/installer.js scripts/postinstall.js",
     "prepublish": "npm run bundle-installer",
-    "postinstall": "node scripts/postinstall.js",
+    "postinstall": "node postinstall-hooks.js && node scripts/postinstall.js",
+    "preuninstall": "node preuninstall-hooks.js",
+    "setup": "node scripts/postinstall.js setup",
     "config": "node scripts/postinstall.js config"
   },
   "repository": {
@@ -33,7 +47,8 @@
     "Crash Reporting",
     "Analytics",
     "Facebook",
-    "Google"
+    "Google",
+    "AdMob"
   ],
   "author": "Telerik / Eddy Verbruggen <eddyverbruggen@gmail.com>",
   "license": {
@@ -44,9 +59,15 @@
     "url": "https://github.com/eddyverbruggen/nativescript-plugin-firebase/issues"
   },
   "homepage": "https://github.com/eddyverbruggen/nativescript-plugin-firebase",
+  "dependencies": {
+    "xcode": "0.8.0",
+    "prompt-lite": "^0.1.1",
+    "fs-promise": "^2.0.0",
+    "nativescript-hook": "^0.2.1"
+  },
   "devDependencies": {
     "prompt-lite": "^0.1.1",
     "xcode": "0.8.0",
-    "webpack": "~2.1.0-beta.25"
+    "webpack": "~2.2.0"
   }
 }

@@ -73,18 +73,18 @@
 /*!***************************!*\
   !*** external "readline" ***!
   \***************************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = require("readline");
 
-/***/ },
+/***/ }),
 /* 1 */
 /* unknown exports provided */
 /* all exports used */
 /*!*************************************!*\
   !*** ./~/prompt-lite/lib/prompt.js ***!
   \*************************************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 /*
  * prompt.js: Simple prompt for prompting information from the command line
@@ -892,50 +892,50 @@ function mixin(target) {
 };
 
 
-/***/ },
+/***/ }),
 /* 2 */
 /* unknown exports provided */
 /* all exports used */
 /*!*********************!*\
   !*** external "fs" ***!
   \*********************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = require("fs");
 
-/***/ },
+/***/ }),
 /* 3 */
 /* unknown exports provided */
 /* all exports used */
 /*!***********************!*\
   !*** external "path" ***!
   \***********************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = require("path");
 
-/***/ },
+/***/ }),
 /* 4 */
 /* unknown exports provided */
 /* all exports used */
 /*!**************************!*\
   !*** ./~/async/index.js ***!
   \**************************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // This file is just added for convenience so this repository can be
 // directly checked out into a project's deps folder
 module.exports = __webpack_require__(/*! ./lib/async */ 5);
 
 
-/***/ },
+/***/ }),
 /* 5 */
 /* unknown exports provided */
 /* all exports used */
 /*!******************************!*\
   !*** ./~/async/lib/async.js ***!
   \******************************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 /*global setTimeout: false, console: false */
 (function () {
@@ -1631,14 +1631,14 @@ module.exports = __webpack_require__(/*! ./lib/async */ 5);
 }());
 
 
-/***/ },
+/***/ }),
 /* 6 */
 /* unknown exports provided */
 /* all exports used */
 /*!******************!*\
   !*** ./~/colors ***!
   \******************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
 	throw new Error("Cannot find module '" + req + "'.");
@@ -1649,14 +1649,14 @@ module.exports = webpackEmptyContext;
 webpackEmptyContext.id = 6;
 
 
-/***/ },
+/***/ }),
 /* 7 */
 /* unknown exports provided */
 /* all exports used */
 /*!****************************!*\
   !*** ./~/colors/colors.js ***!
   \****************************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 /*
 colors.js
@@ -1876,7 +1876,7 @@ exports.addSequencer('zebra', function (letter, i, exploded) {
 exports.setTheme = function (theme) {
   if (typeof theme === 'string') {
     try {
-      exports.themes[theme] = !(function webpackMissingModule() { var e = new Error("Cannot find module \".\""); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+      exports.themes[theme] = !(function webpackMissingModule() { var e = new Error("Cannot find module \".\""); e.code = 'MODULE_NOT_FOUND';; throw e; }());
       applyTheme(exports.themes[theme]);
       return exports.themes[theme];
     } catch (err) {
@@ -2002,14 +2002,14 @@ addProperty('zalgo', function () {
 });
 
 
-/***/ },
+/***/ }),
 /* 8 */
 /* unknown exports provided */
 /* all exports used */
 /*!*******************************!*\
   !*** ./~/mute-stream/mute.js ***!
   \*******************************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 var Stream = __webpack_require__(/*! stream */ 13)
 
@@ -2158,14 +2158,14 @@ MuteStream.prototype.destroySoon = proxy('destroySoon')
 MuteStream.prototype.close = proxy('close')
 
 
-/***/ },
+/***/ }),
 /* 9 */
 /* unknown exports provided */
 /* all exports used */
 /*!****************************!*\
   !*** ./~/read/lib/read.js ***!
   \****************************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 
 module.exports = read
@@ -2282,14 +2282,14 @@ function read (opts, cb) {
 }
 
 
-/***/ },
+/***/ }),
 /* 10 */
 /* unknown exports provided */
 /* all exports used */
 /*!******************************************!*\
   !*** ./~/revalidator/lib/revalidator.js ***!
   \******************************************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {(function (exports) {
   exports.validate = validate;
@@ -2721,14 +2721,14 @@ function read (opts, cb) {
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/buildin/module.js */ 11)(module)))
 
-/***/ },
+/***/ }),
 /* 11 */
 /* unknown exports provided */
 /* all exports used */
 /*!***********************************!*\
   !*** (webpack)/buildin/module.js ***!
   \***********************************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = function(module) {
 	if(!module.webpackPolyfill) {
@@ -2738,61 +2738,63 @@ module.exports = function(module) {
 		if(!module.children) module.children = [];
 		Object.defineProperty(module, "loaded", {
 			enumerable: true,
-			configurable: false,
-			get: function() { return module.l; }
+			get: function() {
+				return module.l;
+			}
 		});
 		Object.defineProperty(module, "id", {
 			enumerable: true,
-			configurable: false,
-			get: function() { return module.i; }
+			get: function() {
+				return module.i;
+			}
 		});
 		module.webpackPolyfill = 1;
 	}
 	return module;
-}
+};
 
 
-/***/ },
+/***/ }),
 /* 12 */
 /* unknown exports provided */
 /* all exports used */
 /*!*************************!*\
   !*** external "events" ***!
   \*************************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = require("events");
 
-/***/ },
+/***/ }),
 /* 13 */
 /* unknown exports provided */
 /* all exports used */
 /*!*************************!*\
   !*** external "stream" ***!
   \*************************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = require("stream");
 
-/***/ },
+/***/ }),
 /* 14 */
 /* unknown exports provided */
 /* all exports used */
 /*!***********************!*\
   !*** external "util" ***!
   \***********************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = require("util");
 
-/***/ },
+/***/ }),
 /* 15 */
 /* unknown exports provided */
 /* all exports used */
 /*!******************************!*\
   !*** ./scripts/installer.js ***!
   \******************************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 var fs = __webpack_require__(/*! fs */ 2);
 var path = __webpack_require__(/*! path */ 3);
@@ -2812,7 +2814,6 @@ console.log('NativeScript Firebase Plugin Installation');
 var appRoot = "../../";
 var pluginConfigFile = "firebase.nativescript.json";
 var pluginConfigPath = path.join(appRoot, pluginConfigFile);
-
 var config = {};
 function mergeConfig(result) {
     for (var key in result) {
@@ -2832,12 +2833,33 @@ function readConfig() {
     }
 }
 
-if (process.argv.indexOf("config") == -1 && fs.existsSync(pluginConfigPath)) {
+// workaround for https://github.com/NativeScript/nativescript-cli/issues/2521 (2.5.0 only)
+var nativeScriptVersion = "";
+try {
+  nativeScriptVersion = __webpack_require__(/*! child_process */ 2).execSync('nativescript --version');
+} catch (err) {
+  // On some environments nativescript is not in the PATH
+  // Ignore the error
+}
+
+var isNativeScriptCLI250 = nativeScriptVersion.indexOf("2.5.0") !== -1;
+
+// note that for CI builds you want a pluginConfigFile, otherwise the build will fail
+if (process.argv.indexOf("config") === -1 && fs.existsSync(pluginConfigPath)) {
     readConfig();
     console.log("Config file exists (" + pluginConfigFile + ")");
     askiOSPromptResult(config);
     askAndroidPromptResult(config);
     promptQuestionsResult(config);
+} else if (isNativeScriptCLI250 && process.argv.indexOf("setup") === -1) {
+    console.log("*******************************************************************");
+    console.log("*******************************************************************");
+    console.log("************************** IMPORTANT: *****************************");
+    console.log("*******************  with nativescript 2.5.0  *********************");
+    console.log("************** now execute 'npm run setup' manually ***************");
+    console.log("***** in the node_modules/nativescript-plugin-firebase folder *****");
+    console.log("*******************************************************************");
+    console.log("*******************************************************************");
 } else {
     console.log("No existing " + pluginConfigFile + " config file found, so let's configure the Firebase plugin!");
     prompt.start();
@@ -2922,6 +2944,10 @@ function promptQuestions() {
         name: 'google_auth',
         description: 'Are you using Firebase Google Authentication (y/n)',
         default: 'n'
+    }, {
+      name: 'admob',
+      description: 'Are you using AdMob (y/n)',
+      default: 'n'
     }], function (err, result) {
         if (err) {
             return console.log(err);
@@ -2932,16 +2958,24 @@ function promptQuestions() {
     });
 }
 function promptQuestionsResult(result) {
-    if(usingiOS) {
+    if (usingiOS) {
         writePodFile(result);
-        writeIOSEntitlementsCopyHook();
+        exposeAdMobSymbols(isSelected(result.admob));
     }
-    if(usingAndroid) {
+    if (usingAndroid) {
         writeGradleFile(result);
         writeGoogleServiceCopyHook();
         writeGoogleServiceGradleHook();
     }
     console.log('Firebase post install completed. To re-run this script, navigate to the root directory of `nativescript-plugin-firebase` in your `node_modules` folder and run: `npm run config`.');
+}
+
+function exposeAdMobSymbols(enable) {
+    if (enable && fs.existsSync(directories.ios + '/build.xcconfig.admob')) {
+        fs.renameSync(directories.ios + '/build.xcconfig.admob', directories.ios + '/build.xcconfig');
+    } else if (!enable && fs.existsSync(directories.ios + '/build.xcconfig')) {
+        fs.renameSync(directories.ios + '/build.xcconfig', directories.ios + '/build.xcconfig.admob');
+    }
 }
 
 function askSaveConfigPrompt() {
@@ -2959,27 +2993,6 @@ function askSaveConfigPrompt() {
     });
 }
 
-function writeIOSEntitlementsCopyHook() {
-    console.log("Install ios-entitlements installation hook.");
-    try {
-        var scriptContent = fs.readFileSync(path.join(appRoot, 'node_modules', 'nativescript-plugin-firebase', 'scripts', 'install_ios_entitlements_packed.js'));
-        var scriptPath = path.join(appRoot, "hooks", "after-prepare", "firebase-install-ios-entitlements.js");
-        var afterPrepareDirPath = path.dirname(scriptPath);
-        var hooksDirPath = path.dirname(afterPrepareDirPath);
-        if (!fs.existsSync(afterPrepareDirPath)) {
-            if (!fs.existsSync(hooksDirPath)) {
-                fs.mkdirSync(hooksDirPath);
-            }
-            fs.mkdirSync(afterPrepareDirPath);
-        }
-        fs.writeFileSync(scriptPath, scriptContent);
-
-    } catch(e) {
-        console.log("Failed to install ios-entitlements installation hook.");
-        console.log(e);
-    }
-}
-
 /**
  * Create the iOS PodFile for installing the Firebase iOS dependencies and service dependencies
  *
@@ -2991,7 +3004,7 @@ function writePodFile(result) {
     }
     try {
         fs.writeFileSync(directories.ios + '/Podfile',
-`pod 'Firebase', '~> 3.11.0'
+`pod 'Firebase', '~> 3.13.0'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 
@@ -3006,6 +3019,9 @@ pod 'Firebase/Auth'
 
 # Uncomment if you want to enable Firebase Storage
 ` + (isSelected(result.storage) ? `` : `#`) + `pod 'Firebase/Storage'
+
+# Uncomment if you want to enable AdMob
+` + (isSelected(result.admob) ? `` : `#`) + `pod 'Firebase/AdMob'
 
 # Uncomment if you want to enable Facebook Authentication
 ` + (isSelected(result.facebook_auth) ? `` : `#`) + `pod 'FBSDKCoreKit'
@@ -3051,6 +3067,9 @@ dependencies {
     compile "com.google.firebase:firebase-database:9.8.0"
     compile "com.google.firebase:firebase-auth:9.8.0"
 
+    // for converting Java objects to JS
+    compile "com.google.code.gson:gson:2.8.+"
+    
     // for reading google-services.json and configuration
     def googlePlayServicesVersion = project.hasProperty('googlePlayServicesVersion') ? project.googlePlayServicesVersion : '9.8.0'
     compile "com.google.android.gms:play-services-base:$googlePlayServicesVersion"
@@ -3066,6 +3085,9 @@ dependencies {
 
     // Uncomment if you want Google Cloud Storage
     ` + (isSelected(result.storage) ? `` : `//`) + ` compile 'com.google.firebase:firebase-storage:9.8.0'
+
+    // Uncomment if you want AdMob
+    ` + (isSelected(result.admob) ? `` : `//`) + ` compile 'com.google.firebase:firebase-ads:9.8.+'
 
     // Uncomment if you need Facebook Authentication
     ` + (isSelected(result.facebook_auth) ? `` : `//`) + ` compile "com.facebook.android:facebook-android-sdk:4.+"
@@ -3182,5 +3204,5 @@ function isSelected(value) {
 }
 
 
-/***/ }
+/***/ })
 /******/ ]);
